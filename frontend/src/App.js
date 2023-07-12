@@ -9,6 +9,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [seatCount, setSeatCount] = useState('');
   const toast = useToast();
+  const mainUrl = "https://ticket-reservation.onrender.com"
 
   useEffect(() => {
     fetchSeats();
@@ -16,7 +17,7 @@ function App() {
 
   const fetchSeats = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/bookings');
+      const response = await axios.get(`${mainUrl}/bookings`);
       setSeats(response.data);
       setLoading(false);
     } catch (error) {
@@ -37,7 +38,7 @@ function App() {
     }
 
     try {
-      const response = await axios.post('http://localhost:8080/bookings', { seatCount: parseInt(seatCount) });
+      const response = await axios.post(`${mainUrl}/bookings`, { seatCount: parseInt(seatCount) });
       if (response.data.seatNumbers) {
         const bookedSeatNumbers = response.data.seatNumbers;
         const updatedSeats = seats.map((seat) =>
@@ -69,7 +70,7 @@ function App() {
 
   const handleClearSeats = async () => {
     try {
-      await axios.post('http://localhost:8080/bookings/clear');
+      await axios.post(`${mainUrl}/bookings/clear`);
       fetchSeats();
     } catch (error) {
       console.error('Error clearing seats:', error);
