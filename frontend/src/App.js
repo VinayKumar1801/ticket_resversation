@@ -66,40 +66,7 @@ function App() {
     }
   };
 
-  // const handleSeatBooking = async () => {
-  //   if (seatCount > 7) {
-  //     toast({
-  //       title: 'Cannot book seats',
-  //       description: 'Maximum 7 seats can be reserved at a time.',
-  //       status: 'warning',
-  //       duration: 3000,
-  //       isClosable: true,
-  //     });
-  //     return;
-  //   }
-
-  //   try {
-  //     const response = await axios.post('http://localhost:8080/bookings', { seatCount: parseInt(seatCount) });
-  //     if (response.data.seatNumbers) {
-  //       const bookedSeatNumbers = response.data.seatNumbers;
-  //       const updatedSeats = seats.map((seat) =>
-  //         bookedSeatNumbers.includes(seat.seatNumber) ? { ...seat, isBooked: true } : seat
-  //       );
-  //       setSeats(updatedSeats);
-
-  //       toast({
-  //         title: 'Seats booked successfully',
-  //         description: `Booked seat numbers: ${bookedSeatNumbers.join(', ')}`,
-  //         status: 'success',
-  //         duration: 3000,
-  //         isClosable: true,
-  //       });
-  //     }
-  //     setSeatCount('');
-  //   } catch (error) {
-  //     console.error('Error booking seats:', error);
-  //   }
-  // };
+ 
 
   const handleClearSeats = async () => {
     try {
