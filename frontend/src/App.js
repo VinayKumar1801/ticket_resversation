@@ -127,7 +127,7 @@ function App() {
 
   return (
     <Box display="flex" justifyContent="center" p={4} boxShadow="md" rounded="md">
-      <VStack spacing={4} align="center" width={{ base: '100%', md: '80%' }}>
+      <VStack spacing={4} align="center"  width={{ base: '100%', md: '80%' }}>
         <Box display="flex" alignItems="center">
           <Icon as={FaChair} boxSize={6} color="teal.500" mr={2} />
           <Text fontSize="2xl" fontWeight="bold" color="teal.500">
