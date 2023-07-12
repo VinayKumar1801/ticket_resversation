@@ -73,6 +73,7 @@ router.post('/', async (req, res, next) => {
             // Book nearby seats
             let remainingSeats = seatCount;
             let i = 0;
+            let bookedSeatNumbers = [];
 
             while (remainingSeats > 0 && i < availableSeats.length) {
                 const availableRow = availableSeats[i];
@@ -81,7 +82,7 @@ router.post('/', async (req, res, next) => {
                 if (availableSeatsCount >= remainingSeats) {
                     const seatsToBook = availableRow.slice(0, remainingSeats);
                     bookedSeatNumbers = [...bookedSeatNumbers, ...seatsToBook];
-                    remainingSeats -= seatsToBook.length;
+                    remainingSeats = 0; // Set remainingSeats to 0 to exit the loop
                 } else {
                     bookedSeatNumbers = [...bookedSeatNumbers, ...availableRow];
                     remainingSeats -= availableSeatsCount;
@@ -100,6 +101,7 @@ router.post('/', async (req, res, next) => {
             } else {
                 res.json({ message: 'Seats not available' });
             }
+
         }
     } catch (err) {
         next(err);

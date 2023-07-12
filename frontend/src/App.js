@@ -23,6 +23,7 @@ function App() {
       console.error('Error fetching seats:', error);
     }
   };
+
   const handleSeatBooking = async () => {
     if (seatCount > 7) {
       toast({
@@ -65,8 +66,6 @@ function App() {
       console.error('Error booking seats:', error);
     }
   };
-
- 
 
   const handleClearSeats = async () => {
     try {
@@ -116,17 +115,31 @@ function App() {
     return seatRows;
   };
 
+  const countAvailableSeats = () => {
+    const availableSeats = seats.filter((seat) => !seat.isBooked);
+    return availableSeats.length;
+  };
+
+  const countBookedSeats = () => {
+    const bookedSeats = seats.filter((seat) => seat.isBooked);
+    return bookedSeats.length;
+  };
+
   return (
     <Box display="flex" justifyContent="center" p={4} boxShadow="md" rounded="md">
-      <VStack spacing={4} align="center" width={{ base: "100%", md: "80%" }}>
+      <VStack spacing={4} align="center" width={{ base: '100%', md: '80%' }}>
         <Box display="flex" alignItems="center">
           <Icon as={FaChair} boxSize={6} color="teal.500" mr={2} />
           <Text fontSize="2xl" fontWeight="bold" color="teal.500">
             Seat Booking
           </Text>
         </Box>
+        <Box position="absolute" top={4} left={4}>
+          <Text fontSize="2xl" color="green.400"  fontWeight="bold">Available Seats: {countAvailableSeats()}</Text>
+          <Text fontSize="2xl" color="red.400" fontWeight="bold">Booked Seats: {countBookedSeats()}</Text>
+        </Box>
 
-        <Box display="flex" flexDirection={{ base: "column", md: "row" }} alignItems="center" gap={10}>
+        <Box display="flex" flexDirection={{ base: 'column', md: 'row' }} alignItems="center" gap={10}>
           <Box flex={1} display="flex" flexDirection="column" alignItems="center">
             <Input
               type="number"
@@ -137,7 +150,7 @@ function App() {
             />
 
             <Box display="flex" gap={4}>
-              <Button colorScheme="teal" onClick={handleSeatBooking} disabled={loading || seatCount === ""}>
+              <Button colorScheme="teal" onClick={handleSeatBooking} disabled={loading || seatCount === ''}>
                 Book Seats
               </Button>
 
@@ -147,11 +160,19 @@ function App() {
             </Box>
           </Box>
 
-          <Box flex={2}>{loading ? <Spinner size="lg" /> : <Box>{renderSeats()}</Box>}</Box>
+          <Box flex={2} position="relative">
+            {loading ? (
+              <Spinner size="lg" />
+            ) : (
+              <Box>
+                {renderSeats()}
+              
+              </Box>
+            )}
+          </Box>
         </Box>
       </VStack>
     </Box>
-
   );
 }
 
